@@ -1,119 +1,178 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Gallery - Blackridge Performance</title>
+<meta charset="UTF-8">
+<title>Blackridge Performance</title>
 
-  <style>
+<style>
 
-    body {
-      background: #0a0a0a;
-      color: white;
-      font-family: Arial, sans-serif;
-      margin: 0;
-    }
+body {
+  background: #0a0a0a;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  scroll-behavior: smooth;
+}
 
-    nav {
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-    }
+/* NAVBAR (Same as gallery) */
 
-    nav a {
-      color: white;
-      margin: 20px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+nav {
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
-    nav a:hover {
-      color: red;
-      text-shadow: 0 0 10px red;
-    }
+nav a {
+  color: white;
+  margin: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
 
-    h1 {
-      text-align: center;
-      margin-top: 30px;
-    }
+nav a:hover {
+  color: red;
+  text-shadow: 0 0 10px red;
+}
 
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 30px;
-    }
+/* HERO */
 
-    .gallery img {
-      width: 320px;
-      margin: 15px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: 0.4s;
-      animation: fadeInUp 0.5s ease;
-    }
+.hero {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: fadeInUp 0.8s ease;
+}
 
-    .gallery img:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 25px rgba(255,0,0,0.6);
-    }
+.hero h1 {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
 
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.95);
-      text-align: center;
-      padding-top: 50px;
-    }
+.hero p {
+  color: #aaa;
+  margin-bottom: 25px;
+}
 
-    .modal img {
-      max-width: 90%;
-      max-height: 80%;
-      border-radius: 10px;
-    }
+.hero button {
+  padding: 12px 25px;
+  border: 2px solid red;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      font-size: 40px;
-      cursor: pointer;
-    }
+.hero button:hover {
+  background: red;
+  box-shadow: 0 0 20px rgba(255,0,0,0.6);
+}
 
-    .download-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 25px;
-      border: 2px solid red;
-      color: white;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+/* SECTION */
 
-    .download-btn:hover {
-      background: red;
-    }
+.section {
+  padding: 60px 20px;
+  max-width: 1100px;
+  margin: auto;
+  animation: fadeInUp 0.8s ease;
+}
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+.section h2 {
+  text-align: center;
+  margin-bottom: 40px;
+}
 
-  </style>
+/* FEATURED GRID */
+
+.featured {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.featured img {
+  width: 320px;
+  margin: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.featured img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(255,0,0,0.6);
+}
+
+/* CAPABILITIES */
+
+.capabilities {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.capabilities div {
+  margin: 20px;
+  padding: 20px;
+  width: 250px;
+  border: 1px solid rgba(255,0,0,0.3);
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.capabilities div:hover {
+  background: rgba(255,0,0,0.1);
+  box-shadow: 0 0 20px rgba(255,0,0,0.3);
+}
+
+/* STATS */
+
+.stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.stat {
+  margin: 20px 40px;
+}
+
+.stat-number {
+  font-size: 40px;
+  color: red;
+}
+
+/* FOOTER */
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+}
+
+/* ANIMATION */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+</style>
 </head>
 
 <body>
@@ -124,85 +183,109 @@
   <a href="about.html">About</a>
 </nav>
 
-<h1>Build Gallery</h1>
+<!-- HERO -->
 
-<div class="gallery" id="gallery"></div>
-
-<div id="modal" class="modal">
-
-  <span class="close" onclick="closeModal()">&times;</span>
-
-  <img id="modalImg">
-
-  <br>
-
-  <a id="downloadBtn" class="download-btn" download>
-    Download Image
-  </a>
-
+<div class="hero">
+  <h1>BLACKRIDGE PERFORMANCE</h1>
+  <p>Precision Built. Performance Driven.</p>
+  <button onclick="location.href='gallery.html'">
+    View Full Gallery
+  </button>
 </div>
+
+<!-- FEATURED BUILDS -->
+
+<div class="section">
+  <h2>Featured Builds</h2>
+  <div class="featured" id="featured"></div>
+</div>
+
+<!-- ABOUT -->
+
+<div class="section">
+  <h2>About Blackridge</h2>
+  <p style="color:#aaa; text-align:center; max-width:800px; margin:auto;">
+    Blackridge Performance is a fictional high-performance engineering division focused on custom vehicle builds within BeamNG Drive. Every project emphasizes realism, performance tuning, and aggressive styling.
+  </p>
+</div>
+
+<!-- CAPABILITIES -->
+
+<div class="section">
+  <h2>Capabilities</h2>
+  <div class="capabilities">
+    <div>Full Vehicle Customization</div>
+    <div>Performance Tuning</div>
+    <div>Suspension Engineering</div>
+    <div>Track-Oriented Builds</div>
+  </div>
+</div>
+
+<!-- STATS -->
+
+<div class="section">
+  <h2>Performance Stats</h2>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number" data-target="4">0</div>
+      Builds
+    </div>
+    <div class="stat">
+      <div class="stat-number" data-target="120">0</div>
+      Hours Engineering
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 Blackridge Performance
+</footer>
 
 <script>
 
-// LIST YOUR IMAGE FILES HERE
-// You can use .png or .jpg
+/* SAME IMAGE LIST AS GALLERY */
 
 const imageFiles = [
-
   "23209.png",
   "car2.jpg",
   "mycustombuild.png",
   "etrackbuild.jpg"
-
 ];
 
-// DO NOT EDIT BELOW THIS LINE
+const featured = document.getElementById("featured");
 
-const gallery = document.getElementById("gallery");
-
-imageFiles.forEach(file => {
-
+imageFiles.slice(0,4).forEach(file => {
   let img = document.createElement("img");
-
   img.src = "images/" + file;
-
   img.onclick = function() {
-
-    openModal(this);
-
+    location.href = "gallery.html";
   };
-
-  gallery.appendChild(img);
-
+  featured.appendChild(img);
 });
 
-function openModal(img) {
+/* STATS COUNTER */
 
-  document.getElementById("modal").style.display = "block";
+const counters = document.querySelectorAll(".stat-number");
 
-  document.getElementById("modalImg").src = img.src;
+counters.forEach(counter => {
 
-  document.getElementById("downloadBtn").href = img.src;
+  const target = +counter.dataset.target;
+  let count = 0;
 
-}
+  const update = () => {
+    const increment = target / 100;
+    count += increment;
 
-function closeModal() {
+    if (count < target) {
+      counter.innerText = Math.floor(count);
+      requestAnimationFrame(update);
+    } else {
+      counter.innerText = target;
+    }
+  };
 
-  document.getElementById("modal").style.display = "none";
-
-}
-
-window.onclick = function(event) {
-
-  let modal = document.getElementById("modal");
-
-  if (event.target == modal) {
-
-    modal.style.display = "none";
-
-  }
-
-}
+  update();
+});
 
 </script>
 
