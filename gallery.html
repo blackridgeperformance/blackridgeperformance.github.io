@@ -38,7 +38,6 @@
     h1 {
       text-align: center;
       margin-top: 30px;
-      animation: fadeIn 1s ease;
     }
 
     .gallery {
@@ -62,8 +61,6 @@
       box-shadow: 0 0 25px rgba(255,0,0,0.6);
     }
 
-    /* Fullscreen modal */
-
     .modal {
       display: none;
       position: fixed;
@@ -81,7 +78,6 @@
       max-width: 90%;
       max-height: 80%;
       border-radius: 10px;
-      animation: zoomIn 0.3s ease;
     }
 
     .close {
@@ -90,7 +86,6 @@
       right: 35px;
       font-size: 40px;
       cursor: pointer;
-      color: white;
     }
 
     .download-btn {
@@ -105,12 +100,6 @@
 
     .download-btn:hover {
       background: red;
-      box-shadow: 0 0 15px red;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
     }
 
     @keyframes fadeInUp {
@@ -121,17 +110,6 @@
       to {
         opacity: 1;
         transform: translateY(0);
-      }
-    }
-
-    @keyframes zoomIn {
-      from {
-        transform: scale(0.8);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
       }
     }
 
@@ -150,8 +128,6 @@
 
 <div class="gallery" id="gallery"></div>
 
-<!-- Fullscreen Modal -->
-
 <div id="modal" class="modal">
 
   <span class="close" onclick="closeModal()">&times;</span>
@@ -168,7 +144,37 @@
 
 <script>
 
-// FULLSCREEN FUNCTION
+// LIST YOUR IMAGE FILES HERE
+// You can use .png or .jpg
+
+const imageFiles = [
+
+  "car1.png",
+  "car2.jpg",
+  "mycustombuild.png",
+  "etrackbuild.jpg"
+
+];
+
+// DO NOT EDIT BELOW THIS LINE
+
+const gallery = document.getElementById("gallery");
+
+imageFiles.forEach(file => {
+
+  let img = document.createElement("img");
+
+  img.src = "images/" + file;
+
+  img.onclick = function() {
+
+    openModal(this);
+
+  };
+
+  gallery.appendChild(img);
+
+});
 
 function openModal(img) {
 
@@ -186,8 +192,6 @@ function closeModal() {
 
 }
 
-// Close when clicking background
-
 window.onclick = function(event) {
 
   let modal = document.getElementById("modal");
@@ -197,32 +201,6 @@ window.onclick = function(event) {
     modal.style.display = "none";
 
   }
-
-}
-
-// AUTO LOAD UP TO 20 IMAGES
-
-const gallery = document.getElementById("gallery");
-
-for (let i = 1; i <= 20; i++) {
-
-  let img = document.createElement("img");
-
-  img.src = "images/car" + i + ".png";
-
-  img.onclick = function() {
-
-    openModal(this);
-
-  };
-
-  // Only add if image exists
-
-  img.onload = function() {
-
-    gallery.appendChild(img);
-
-  };
 
 }
 
