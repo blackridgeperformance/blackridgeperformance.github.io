@@ -2,473 +2,770 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Blackridge Performance</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>Blackridge Performance | Custom BeamNG Builds</title>
 <style>
-
-/* ======================
-GLOBAL
-====================== */
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Segoe UI, sans-serif;
-scroll-behavior:smooth;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-background:linear-gradient(to bottom,#05070f,#0a0f1f);
-color:white;
-overflow-x:hidden;
+:root {
+  --primary: #00ffd5;
+  --accent: #ff0055;
+  --dark: #05070d;
+  --dark-alt: #0a0f1f;
 }
 
-/* ======================
-NAVBAR
-====================== */
-
-.navbar{
-position:fixed;
-top:0;
-width:100%;
-padding:15px 30px;
-background:rgba(10,15,30,0.5);
-backdrop-filter:blur(10px);
-display:flex;
-justify-content:space-between;
-align-items:center;
-z-index:1000;
+body {
+  background: radial-gradient(circle at bottom, var(--dark-alt), var(--dark) 80%);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+  position: relative;
 }
 
-.nav-logo{
-font-weight:bold;
-color:#00ffaa;
+/* ANIMATED GRID BACKGROUND */
+.grid-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background-image: 
+    linear-gradient(rgba(0, 255, 213, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 213, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridScroll 20s linear infinite;
+  transform: perspective(500px) rotateX(60deg);
+  transform-origin: center bottom;
 }
 
-.nav-links a{
-color:white;
-text-decoration:none;
-margin-left:20px;
-transition:0.3s;
+@keyframes gridScroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 50px; }
 }
 
-.nav-links a:hover{
-color:#00ffaa;
+/* SCAN LINE EFFECT */
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  box-shadow: 0 0 20px var(--primary);
+  animation: scan 4s ease-in-out infinite;
+  z-index: 1000;
+  pointer-events: none;
 }
 
-/* ======================
-STARS BACKGROUND
-====================== */
-
-.stars{
-position:fixed;
-width:100%;
-height:100%;
-z-index:-1;
+@keyframes scan {
+  0%, 100% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
 }
 
-.star{
-position:absolute;
-background:white;
-border-radius:50%;
-animation:twinkle infinite alternate;
+/* NAVBAR */
+nav {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+  padding: 20px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(0, 255, 213, 0.2);
 }
 
-@keyframes twinkle{
-from{opacity:0.2;}
-to{opacity:1;}
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-.shooting-star{
-position:absolute;
-width:2px;
-height:80px;
-background:linear-gradient(white,transparent);
-opacity:0.7;
-animation:shoot linear infinite;
+.logo {
+  font-size: 24px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+  text-shadow: 0 0 30px rgba(0, 255, 213, 0.3);
+  position: relative;
 }
 
-@keyframes shoot{
-from{
-transform:translateY(-100px) translateX(0);
-opacity:1;
-}
-to{
-transform:translateY(800px) translateX(400px);
-opacity:0;
-}
-}
-
-/* ======================
-SECTIONS
-====================== */
-
-.section{
-padding:100px 20px;
-max-width:1100px;
-margin:auto;
+.logo::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), transparent);
+  animation: pulse 2s ease-in-out infinite;
 }
 
-.hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scaleX(0.5); }
+  50% { opacity: 1; transform: scaleX(1); }
 }
 
-.title{
-font-size:60px;
-background:linear-gradient(90deg,#00ffaa,#00aaff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:glow 3s infinite alternate;
+.nav-links {
+  display: flex;
+  gap: 40px;
 }
 
-@keyframes glow{
-from{filter:drop-shadow(0 0 5px #00ffaa);}
-to{filter:drop-shadow(0 0 20px #00aaff);}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-.subtitle{
-color:#aaa;
-margin:15px 0 30px 0;
+nav a::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px var(--primary);
 }
 
-button{
-background:linear-gradient(90deg,#00ffaa,#00aaff);
-border:none;
-padding:15px 30px;
-border-radius:10px;
-color:black;
-font-weight:bold;
-cursor:pointer;
-transition:0.25s;
+nav a:hover {
+  color: var(--primary);
+  text-shadow: 0 0 20px rgba(0, 255, 213, 0.8);
 }
 
-button:hover{
-transform:translateY(-5px);
-box-shadow:0 10px 25px rgba(0,255,200,0.4);
+nav a:hover::before {
+  width: 100%;
 }
 
-/* ======================
-FEATURED GRID
-====================== */
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
+/* STARFIELD */
+.stars {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
-.grid img{
-width:100%;
-border-radius:10px;
-transition:0.3s;
-cursor:pointer;
+.star {
+  position: absolute;
+  background: var(--primary);
+  border-radius: 50%;
+  animation: twinkle infinite alternate;
+  box-shadow: 0 0 4px var(--primary);
 }
 
-.grid img:hover{
-transform:scale(1.05);
-box-shadow:0 15px 35px rgba(0,255,200,0.3);
+@keyframes twinkle {
+  from { opacity: 0.2; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1.2); }
 }
 
-/* ======================
-CARDS
-====================== */
-
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
+/* HERO SECTION */
+.hero {
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 40px 20px;
 }
 
-.card{
-background:rgba(255,255,255,0.05);
-padding:20px;
-border-radius:10px;
-transition:0.3s;
+.hero-content {
+  text-align: center;
+  z-index: 2;
+  animation: fadeInUp 1s ease-out;
 }
 
-.card:hover{
-transform:translateY(-5px);
-background:rgba(0,255,200,0.08);
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* ======================
-STATS
-====================== */
-
-.stats{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-text-align:center;
-gap:20px;
+.hero h1 {
+  font-size: clamp(40px, 8vw, 80px);
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  position: relative;
+  animation: glitch 5s infinite;
 }
 
-.stat-number{
-font-size:40px;
-color:#00ffaa;
+@keyframes glitch {
+  0%, 90%, 100% {
+    transform: translate(0);
+    text-shadow: none;
+  }
+  92% {
+    transform: translate(-2px, 2px);
+    text-shadow: 2px -2px 0 var(--accent), -2px 2px 0 var(--primary);
+  }
+  94% {
+    transform: translate(2px, -2px);
+    text-shadow: -2px 2px 0 var(--accent), 2px -2px 0 var(--primary);
+  }
 }
 
-.footer{
-text-align:center;
-padding:40px;
-color:#666;
+.hero-subtitle {
+  font-size: clamp(18px, 3vw, 26px);
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 300;
 }
 
-/* ======================
-SCROLL ANIMATION
-====================== */
-
-.reveal{
-opacity:0;
-transform:translateY(40px);
-transition:1s;
+.hero-tagline {
+  font-size: clamp(14px, 2vw, 18px);
+  color: rgba(0, 255, 213, 0.9);
+  font-style: italic;
+  margin-bottom: 50px;
+  max-width: 600px;
 }
 
-.reveal.active{
-opacity:1;
-transform:translateY(0);
+/* CTA BUTTON */
+.cta-button {
+  display: inline-block;
+  padding: 18px 45px;
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
 }
 
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 213, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.cta-button:hover::before {
+  left: 100%;
+}
+
+.cta-button:hover {
+  background: var(--primary);
+  color: var(--dark);
+  box-shadow: 0 0 30px var(--primary), inset 0 0 20px rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* SECTION HEADER */
+.section {
+  padding: 80px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800;
+  color: white;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  box-shadow: 0 0 15px var(--primary);
+}
+
+.section-subtitle {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  margin-top: 25px;
+}
+
+/* GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  padding: 20px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  cursor: pointer;
+  aspect-ratio: 16/10;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 213, 0.1);
+  transition: all 0.4s ease;
+}
+
+.gallery-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 213, 0.2), transparent);
+  transition: left 0.6s ease;
+  z-index: 2;
+}
+
+.gallery-item:hover::before {
+  left: 100%;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(0, 255, 213, 0.3),
+    inset 0 0 20px rgba(0, 255, 213, 0.1);
+  border-color: var(--primary);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+.gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  padding: 20px;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  transform: translateY(0);
+}
+
+.gallery-overlay h3 {
+  color: var(--primary);
+  font-size: 18px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.gallery-overlay p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.97);
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 60px 20px 20px;
+}
+
+.modal img {
+  max-width: 90%;
+  max-height: 75vh;
+  border-radius: 10px;
+  box-shadow: 0 0 50px rgba(0, 255, 213, 0.3);
+  animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.close {
+  position: absolute;
+  right: 40px;
+  top: 30px;
+  font-size: 50px;
+  font-weight: 300;
+  cursor: pointer;
+  color: white;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.close:hover {
+  color: var(--primary);
+  text-shadow: 0 0 20px var(--primary);
+  transform: rotate(90deg);
+}
+
+.download-btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 15px 35px;
+  border: 2px solid var(--primary);
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.download-btn:hover {
+  background: var(--primary);
+  color: var(--dark);
+  box-shadow: 0 0 30px var(--primary);
+  transform: translateY(-2px);
+}
+
+/* STATS SECTION */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin: 60px 0;
+}
+
+.stat-card {
+  background: rgba(0, 255, 213, 0.05);
+  border: 1px solid rgba(0, 255, 213, 0.2);
+  padding: 30px;
+  text-align: center;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+}
+
+.stat-card:hover {
+  background: rgba(0, 255, 213, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 255, 213, 0.2);
+}
+
+.stat-number {
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: 10px;
+  text-shadow: 0 0 20px rgba(0, 255, 213, 0.5);
+}
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-top: 1px solid rgba(0, 255, 213, 0.2);
+  margin-top: 80px;
+}
+
+footer p {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav {
+    padding: 15px 20px;
+  }
+  
+  .nav-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .nav-links {
+    gap: 20px;
+  }
+  
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* LOADING ANIMATION */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.gallery-item {
+  animation: slideInFromLeft 0.6s ease forwards;
+}
+
+.gallery-item:nth-child(1) { animation-delay: 0.1s; opacity: 0; }
+.gallery-item:nth-child(2) { animation-delay: 0.2s; opacity: 0; }
+.gallery-item:nth-child(3) { animation-delay: 0.3s; opacity: 0; }
+.gallery-item:nth-child(4) { animation-delay: 0.4s; opacity: 0; }
 </style>
 </head>
 <body>
+<!-- Grid Background -->
+<div class="grid-bg"></div>
 
+<!-- Scan Line -->
+<div class="scanline"></div>
 
-<div class="navbar">
-<div class="nav-logo">Blackridge</div>
-
-<div class="nav-links">
-<a href="#featured">Builds</a>
-<a href="#about">About</a>
-<a href="#stats">Stats</a>
-<a href="gallery.html">Gallery</a>
-</div>
-</div>
-
-
+<!-- Stars -->
 <div class="stars" id="stars"></div>
 
+<!-- Navigation -->
+<nav>
+  <div class="nav-container">
+    <div class="logo">BLACKRIDGE</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
 
-<!-- HERO -->
-
+<!-- Hero Section -->
 <div class="hero">
-
-<div class="title">
-BLACKRIDGE PERFORMANCE
+  <div class="hero-content">
+    <h1>BLACKRIDGE PERFORMANCE</h1>
+    <p class="hero-subtitle">Custom BeamNG Performance Builds</p>
+    <p class="hero-tagline">Where engineering meets adrenaline. Pushing the limits of virtual automotive performance.</p>
+    <a href="#gallery" class="cta-button">View Builds</a>
+  </div>
 </div>
 
-<div class="subtitle">
-Precision Built. Performance Driven.
+<!-- Stats Section -->
+<div class="section">
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-number">250+</div>
+      <div class="stat-label">Custom Builds</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">1000+</div>
+      <div class="stat-label">HP Average</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">0-60</div>
+      <div class="stat-label">In 2.4s</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Passion</div>
+    </div>
+  </div>
 </div>
 
-<button onclick="location.href='gallery.html'">
-View Gallery
-</button>
-
+<!-- Gallery Section -->
+<div class="section" id="gallery">
+  <div class="section-header">
+    <h2 class="section-title">Featured Builds</h2>
+    <p class="section-subtitle">Showcasing our latest custom performance vehicles</p>
+  </div>
+  <div class="gallery" id="galleryGrid"></div>
 </div>
 
-
-<!-- FEATURED -->
-
-<div class="section reveal" id="featured">
-
-<h2>Featured Builds</h2>
-
-<div class="grid" id="featuredGrid"></div>
-
+<!-- Modal -->
+<div id="modal" class="modal">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <div class="modal-content">
+    <img id="modalImg" alt="Build showcase">
+    <a id="downloadBtn" class="download-btn" download>
+      ⬇ Download Image
+    </a>
+  </div>
 </div>
 
-
-<!-- ABOUT -->
-
-<div class="section reveal" id="about">
-
-<h2>About Blackridge</h2>
-
-<p style="color:#aaa;margin-top:15px;">
-Blackridge Performance is a fictional engineering and customization division focused on creating high-performance vehicle builds within BeamNG Drive. Every build is engineered with attention to realism, performance balance, and aggressive visual identity.
-</p>
-
-</div>
-
-
-<!-- CAPABILITIES -->
-
-<div class="section reveal">
-
-<h2>Capabilities</h2>
-
-<div class="cards">
-
-<div class="card">Full Vehicle Customization</div>
-<div class="card">Performance Engineering</div>
-<div class="card">Suspension Tuning</div>
-<div class="card">Visual Redesign</div>
-
-</div>
-
-</div>
-
-
-<!-- STATS -->
-
-<div class="section reveal" id="stats">
-
-<h2>Performance Stats</h2>
-
-<div class="stats">
-
-<div>
-<div class="stat-number" data-target="24">0</div>
-Builds
-</div>
-
-<div>
-<div class="stat-number" data-target="120">0</div>
-Hours Engineering
-</div>
-
-<div>
-<div class="stat-number" data-target="6">0</div>
-Platforms
-</div>
-
-</div>
-
-</div>
-
-
-<!-- PHILOSOPHY -->
-
-<div class="section reveal">
-
-<h2>Philosophy</h2>
-
-<p style="color:#aaa;margin-top:15px;">
-Every Blackridge build is created with purpose. Performance, realism, and design work together to produce machines that feel believable, aggressive, and engineered.
-</p>
-
-</div>
-
-
-<div class="footer">
-© 2026 Blackridge Performance
-</div>
-
+<!-- Footer -->
+<footer>
+  <p>© 2026 BLACKRIDGE PERFORMANCE | Built with passion and precision</p>
+</footer>
 
 <script>
-
-/* IMAGE LIST */
-
-const imageFiles=[
-"23209.png",
-"car2.jpg",
-"car3.png",
-"car4.jpg",
-"car5.png"
+/* IMAGE LIST WITH METADATA */
+const builds = [
+  { file: "23209.png", name: "Drift Shittle", specs: "2JZ Swap - 780HP" },
+  { file: "car2.jpg", name: "Street Demon", specs: "Supercharged V6 - 850HP" },
+  { file: "mycustombuild.png", name: "Track Beast", specs: "Race Tuned - 950HP" },
+  { file: "etrackbuild.jpg", name: "Circuit King", specs: "Modified Chassis - 1100HP" }
 ];
 
-const grid=document.getElementById("featuredGrid");
+const gallery = document.getElementById("galleryGrid");
 
-imageFiles.slice(0,4).forEach(file=>{
-let img=document.createElement("img");
-img.src="images/"+file;
-img.onclick=()=>location.href="gallery.html";
-grid.appendChild(img);
+builds.forEach((build, index) => {
+  let item = document.createElement("div");
+  item.className = "gallery-item";
+  
+  let img = document.createElement("img");
+  img.src = "images/" + build.file;
+  img.alt = build.name;
+  
+  let overlay = document.createElement("div");
+  overlay.className = "gallery-overlay";
+  overlay.innerHTML = `
+    <h3>${build.name}</h3>
+    <p>${build.specs}</p>
+  `;
+  
+  item.appendChild(img);
+  item.appendChild(overlay);
+  
+  item.onclick = function() {
+    openModal(img, build);
+  };
+  
+  gallery.appendChild(item);
 });
 
-
-/* STARS */
-
-const stars=document.getElementById("stars");
-
-for(let i=0;i<120;i++){
-let star=document.createElement("div");
-star.className="star";
-let size=Math.random()*3;
-star.style.width=size+"px";
-star.style.height=size+"px";
-star.style.left=Math.random()*100+"%";
-star.style.top=Math.random()*100+"%";
-star.style.animationDuration=(Math.random()*3+2)+"s";
-stars.appendChild(star);
+/* MODAL FUNCTIONS */
+function openModal(img, build) {
+  const modal = document.getElementById("modal");
+  const modalImg = document.getElementById("modalImg");
+  const downloadBtn = document.getElementById("downloadBtn");
+  
+  modal.style.display = "block";
+  modalImg.src = img.src;
+  downloadBtn.href = img.src;
+  downloadBtn.download = build.name + ".png";
+  
+  document.body.style.overflow = "hidden";
 }
 
-/* SHOOTING STARS */
-
-setInterval(()=>{
-let star=document.createElement("div");
-star.className="shooting-star";
-star.style.left=Math.random()*100+"%";
-star.style.top="0px";
-stars.appendChild(star);
-
-setTimeout(()=>star.remove(),2000);
-
-},3000);
-
-
-/* SCROLL REVEAL */
-
-const reveals=document.querySelectorAll(".reveal");
-
-window.addEventListener("scroll",()=>{
-
-reveals.forEach(el=>{
-
-let top=el.getBoundingClientRect().top;
-
-if(top<window.innerHeight-100){
-el.classList.add("active");
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+  document.body.style.overflow = "auto";
 }
 
+// Close modal on ESC key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
 });
 
+// Close modal on background click
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
 });
 
-
-/* STATS COUNTER */
-
-const counters=document.querySelectorAll(".stat-number");
-
-counters.forEach(counter=>{
-
-let target=counter.dataset.target;
-
-let count=0;
-
-let update=()=>{
-
-let increment=target/100;
-
-count+=increment;
-
-if(count<target){
-
-counter.innerText=Math.floor(count);
-
-requestAnimationFrame(update);
-
-}else{
-
-counter.innerText=target;
-
+/* STARFIELD GENERATION */
+const starsContainer = document.getElementById("stars");
+for (let i = 0; i < 150; i++) {
+  let star = document.createElement("div");
+  star.className = "star";
+  
+  let size = Math.random() * 3;
+  star.style.width = size + "px";
+  star.style.height = size + "px";
+  star.style.left = Math.random() * 100 + "%";
+  star.style.top = Math.random() * 100 + "%";
+  star.style.animationDuration = (Math.random() * 3 + 2) + "s";
+  star.style.animationDelay = Math.random() * 2 + "s";
+  
+  starsContainer.appendChild(star);
 }
 
-};
-
-update();
-
+/* SMOOTH SCROLLING */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
 });
-
 </script>
-
-
 </body>
 </html>
