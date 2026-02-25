@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blackridge Performance</title>
 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(180deg, #0a0a0a, #111);
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    nav {
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      animation: slideDown 1s ease;
+    }
+
+    nav a {
+      color: white;
+      margin: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: red;
+      text-shadow: 0 0 10px red;
+    }
+
+    header {
+      text-align: center;
+      padding: 120px 20px;
+      animation: fadeIn 2s ease;
+    }
+
+    header h1 {
+      font-size: 60px;
+      letter-spacing: 6px;
+      animation: glow 3s infinite alternate;
+    }
+
+    header p {
+      color: #aaa;
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    .button {
+      margin-top: 40px;
+      display: inline-block;
+      padding: 15px 30px;
+      border: 2px solid red;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      background: red;
+      box-shadow: 0 0 20px red;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes slideDown {
+      from {transform: translateY(-100%);}
+      to {transform: translateY(0);}
+    }
+
+    @keyframes glow {
+      from {text-shadow: 0 0 10px red;}
+      to {text-shadow: 0 0 25px red;}
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="about.html">About</a>
+</nav>
+
+<header>
+
+  <h1>BLACKRIDGE PERFORMANCE</h1>
+
+  <p>Custom BeamNG Performance Engineering</p>
+
+  <a href="gallery.html" class="button">View Gallery</a>
+
+</header>
+
+</body>
+</html>
