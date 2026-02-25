@@ -1,1 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gallery - Blackridge Performance</title>
 
+  <style>
+
+    body {
+      background: #0a0a0a;
+      color: white;
+      font-family: Arial;
+      margin: 0;
+    }
+
+    nav {
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: red;
+      text-shadow: 0 0 10px red;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 40px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .gallery img {
+      width: 320px;
+      margin: 15px;
+      border-radius: 12px;
+      transition: 0.4s;
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(255,0,0,0.6);
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="about.html">About</a>
+</nav>
+
+<h1>Build Gallery</h1>
+
+<div class="gallery">
+
+<img src="images/car1.jpg">
+<img src="images/car2.jpg">
+<img src="images/car3.jpg">
+
+</div>
+
+</body>
+</html>
