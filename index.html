@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blackridge Performance | Custom BeamNG Builds</title>
+<title>Blackridge Performance</title>
 <style>
 * {
   margin: 0;
@@ -11,63 +11,11 @@
   box-sizing: border-box;
 }
 
-:root {
-  --primary: #00ffd5;
-  --accent: #ff0055;
-  --dark: #05070d;
-  --dark-alt: #0a0f1f;
-}
-
 body {
-  background: radial-gradient(circle at bottom, var(--dark-alt), var(--dark) 80%);
-  color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
+  background: #0a0a0a;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   overflow-x: hidden;
-  position: relative;
-}
-
-/* ANIMATED GRID BACKGROUND */
-.grid-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-  background-image: 
-    linear-gradient(rgba(0, 255, 213, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 213, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: gridScroll 20s linear infinite;
-  transform: perspective(500px) rotateX(60deg);
-  transform-origin: center bottom;
-}
-
-@keyframes gridScroll {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 50px; }
-}
-
-/* SCAN LINE EFFECT */
-.scanline {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--primary), transparent);
-  box-shadow: 0 0 20px var(--primary);
-  animation: scan 4s ease-in-out infinite;
-  z-index: 1000;
-  pointer-events: none;
-}
-
-@keyframes scan {
-  0%, 100% { top: 0%; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
 }
 
 /* NAVBAR */
@@ -78,80 +26,36 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(0, 255, 213, 0.2);
-}
-
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: 900;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: 2px;
-  text-shadow: 0 0 30px rgba(0, 255, 213, 0.3);
-  position: relative;
-}
-
-.logo::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--primary), transparent);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.3; transform: scaleX(0.5); }
-  50% { opacity: 1; transform: scaleX(1); }
-}
-
-.nav-links {
-  display: flex;
-  gap: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 nav a {
-  color: white;
+  color: #fff;
+  margin: 0 25px;
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 1px;
-  text-transform: uppercase;
   position: relative;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
 }
 
-nav a::before {
+nav a::after {
   content: '';
   position: absolute;
   bottom: -5px;
-  left: 50%;
+  left: 0;
   width: 0;
   height: 2px;
-  background: var(--primary);
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
-  box-shadow: 0 0 10px var(--primary);
+  background: #00ffd5;
+  transition: width 0.3s ease;
 }
 
 nav a:hover {
-  color: var(--primary);
-  text-shadow: 0 0 20px rgba(0, 255, 213, 0.8);
+  color: #00ffd5;
 }
 
-nav a:hover::before {
+nav a:hover::after {
   width: 100%;
 }
 
@@ -165,38 +69,42 @@ nav a:hover::before {
 
 .star {
   position: absolute;
-  background: var(--primary);
+  background: #fff;
   border-radius: 50%;
-  animation: twinkle infinite alternate;
-  box-shadow: 0 0 4px var(--primary);
+  animation: twinkle infinite alternate ease-in-out;
 }
 
 @keyframes twinkle {
-  from { opacity: 0.2; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1.2); }
+  from { opacity: 0.3; }
+  to { opacity: 1; }
 }
 
-/* HERO SECTION */
+/* HERO */
 .hero {
-  min-height: 85vh;
+  height: 85vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
+  text-align: center;
   padding: 40px 20px;
 }
 
-.hero-content {
-  text-align: center;
-  z-index: 2;
-  animation: fadeInUp 1s ease-out;
+.hero h1 {
+  font-size: clamp(48px, 8vw, 90px);
+  font-weight: 900;
+  background: linear-gradient(120deg, #fff 0%, #00ffd5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  animation: fadeInUp 0.8s ease-out;
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -204,213 +112,42 @@ nav a:hover::before {
   }
 }
 
-.hero h1 {
-  font-size: clamp(40px, 8vw, 80px);
-  font-weight: 900;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: 4px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  position: relative;
-  animation: glitch 5s infinite;
-}
-
-@keyframes glitch {
-  0%, 90%, 100% {
-    transform: translate(0);
-    text-shadow: none;
-  }
-  92% {
-    transform: translate(-2px, 2px);
-    text-shadow: 2px -2px 0 var(--accent), -2px 2px 0 var(--primary);
-  }
-  94% {
-    transform: translate(2px, -2px);
-    text-shadow: -2px 2px 0 var(--accent), 2px -2px 0 var(--primary);
-  }
-}
-
-.hero-subtitle {
-  font-size: clamp(18px, 3vw, 26px);
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 40px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-weight: 300;
-}
-
-.hero-tagline {
-  font-size: clamp(14px, 2vw, 18px);
-  color: rgba(0, 255, 213, 0.9);
-  font-style: italic;
-  margin-bottom: 50px;
-  max-width: 600px;
-}
-
-/* CTA BUTTON */
-.cta-button {
-  display: inline-block;
-  padding: 18px 45px;
-  background: transparent;
-  border: 2px solid var(--primary);
-  color: white;
-  text-decoration: none;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s ease;
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-}
-
-.cta-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 213, 0.3), transparent);
-  transition: left 0.6s ease;
-}
-
-.cta-button:hover::before {
-  left: 100%;
-}
-
-.cta-button:hover {
-  background: var(--primary);
-  color: var(--dark);
-  box-shadow: 0 0 30px var(--primary), inset 0 0 20px rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-}
-
-/* SECTION HEADER */
-.section {
-  padding: 80px 20px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.section-title {
-  font-size: clamp(32px, 5vw, 48px);
-  font-weight: 800;
-  color: white;
-  margin-bottom: 15px;
-  text-transform: uppercase;
+.hero p {
+  font-size: clamp(16px, 2.5vw, 22px);
+  color: rgba(255, 255, 255, 0.7);
   letter-spacing: 3px;
-  position: relative;
-  display: inline-block;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  box-shadow: 0 0 15px var(--primary);
-}
-
-.section-subtitle {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 18px;
-  margin-top: 25px;
+  font-weight: 300;
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
 
 /* GALLERY */
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 30px;
-  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 60px 30px;
+  gap: 25px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-.gallery-item {
-  position: relative;
-  overflow: hidden;
-  border-radius: 15px;
-  cursor: pointer;
-  aspect-ratio: 16/10;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(0, 255, 213, 0.1);
-  transition: all 0.4s ease;
-}
-
-.gallery-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 213, 0.2), transparent);
-  transition: left 0.6s ease;
-  z-index: 2;
-}
-
-.gallery-item:hover::before {
-  left: 100%;
-}
-
-.gallery-item img {
-  width: 100%;
-  height: 100%;
+.gallery img {
+  width: 350px;
+  height: 220px;
   object-fit: cover;
-  transition: transform 0.6s ease;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.85);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.gallery-item:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(0, 255, 213, 0.3),
-    inset 0 0 20px rgba(0, 255, 213, 0.1);
-  border-color: var(--primary);
-}
-
-.gallery-item:hover img {
-  transform: scale(1.1);
-}
-
-.gallery-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-  padding: 20px;
-  transform: translateY(100%);
-  transition: transform 0.4s ease;
-}
-
-.gallery-item:hover .gallery-overlay {
-  transform: translateY(0);
-}
-
-.gallery-overlay h3 {
-  color: var(--primary);
-  font-size: 18px;
-  margin-bottom: 5px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.gallery-overlay p {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
+.gallery img:hover {
+  transform: translateY(-8px) scale(1.03);
+  filter: brightness(1);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 255, 213, 0.3);
 }
 
 /* MODAL */
@@ -418,13 +155,19 @@ nav a:hover::before {
   display: none;
   position: fixed;
   z-index: 999;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.97);
+  background: rgba(0, 0, 0, 0.96);
   backdrop-filter: blur(10px);
-  animation: fadeIn 0.3s ease;
+}
+
+.modal.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.25s ease;
 }
 
 @keyframes fadeIn {
@@ -433,339 +176,234 @@ nav a:hover::before {
 }
 
 .modal-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding: 60px 20px 20px;
+  position: relative;
+  max-width: 90%;
+  max-height: 85vh;
+  padding: 20px;
 }
 
 .modal img {
-  max-width: 90%;
-  max-height: 75vh;
-  border-radius: 10px;
-  box-shadow: 0 0 50px rgba(0, 255, 213, 0.3);
-  animation: zoomIn 0.3s ease;
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 4px;
+  animation: modalZoom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes zoomIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+@keyframes modalZoom {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .close {
   position: absolute;
-  right: 40px;
+  right: 30px;
   top: 30px;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 300;
   cursor: pointer;
-  color: white;
+  color: #fff;
   transition: all 0.3s ease;
   z-index: 1001;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .close:hover {
-  color: var(--primary);
-  text-shadow: 0 0 20px var(--primary);
+  color: #00ffd5;
   transform: rotate(90deg);
 }
 
 .download-btn {
   display: inline-block;
   margin-top: 25px;
-  padding: 15px 35px;
-  border: 2px solid var(--primary);
-  color: white;
+  padding: 14px 35px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
   text-decoration: none;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 2px;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1.5px;
   transition: all 0.3s ease;
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  border-radius: 2px;
 }
 
 .download-btn:hover {
-  background: var(--primary);
-  color: var(--dark);
-  box-shadow: 0 0 30px var(--primary);
-  transform: translateY(-2px);
-}
-
-/* STATS SECTION */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 30px;
-  margin: 60px 0;
-}
-
-.stat-card {
+  border-color: #00ffd5;
+  color: #00ffd5;
   background: rgba(0, 255, 213, 0.05);
-  border: 1px solid rgba(0, 255, 213, 0.2);
-  padding: 30px;
-  text-align: center;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
-}
-
-.stat-card:hover {
-  background: rgba(0, 255, 213, 0.1);
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 255, 213, 0.2);
-}
-
-.stat-number {
-  font-size: 48px;
-  font-weight: 900;
-  color: var(--primary);
-  margin-bottom: 10px;
-  text-shadow: 0 0 20px rgba(0, 255, 213, 0.5);
-}
-
-.stat-label {
-  color: rgba(255, 255, 255, 0.7);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 14px;
+  transform: translateY(-2px);
 }
 
 /* FOOTER */
 footer {
   text-align: center;
   padding: 40px 20px;
-  background: rgba(0, 0, 0, 0.5);
-  border-top: 1px solid rgba(0, 255, 213, 0.2);
-  margin-top: 80px;
-}
-
-footer p {
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 14px;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 13px;
   letter-spacing: 1px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 60px;
 }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
   nav {
     padding: 15px 20px;
+    text-align: center;
   }
   
-  .nav-container {
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .nav-links {
-    gap: 20px;
+  nav a {
+    margin: 0 15px;
+    font-size: 12px;
   }
   
   .gallery {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    padding: 40px 20px;
   }
   
-  .stats {
-    grid-template-columns: 1fr;
+  .gallery img {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .close {
+    right: 20px;
+    top: 20px;
+    font-size: 35px;
   }
 }
 
-/* LOADING ANIMATION */
-@keyframes slideInFromLeft {
+/* SMOOTH REVEAL */
+.gallery img {
+  opacity: 0;
+  animation: revealImage 0.6s ease-out forwards;
+}
+
+.gallery img:nth-child(1) { animation-delay: 0.1s; }
+.gallery img:nth-child(2) { animation-delay: 0.2s; }
+.gallery img:nth-child(3) { animation-delay: 0.3s; }
+.gallery img:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes revealImage {
   from {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
-
-.gallery-item {
-  animation: slideInFromLeft 0.6s ease forwards;
-}
-
-.gallery-item:nth-child(1) { animation-delay: 0.1s; opacity: 0; }
-.gallery-item:nth-child(2) { animation-delay: 0.2s; opacity: 0; }
-.gallery-item:nth-child(3) { animation-delay: 0.3s; opacity: 0; }
-.gallery-item:nth-child(4) { animation-delay: 0.4s; opacity: 0; }
 </style>
 </head>
 <body>
-<!-- Grid Background -->
-<div class="grid-bg"></div>
-
-<!-- Scan Line -->
-<div class="scanline"></div>
-
-<!-- Stars -->
+<!-- Starfield -->
 <div class="stars" id="stars"></div>
 
 <!-- Navigation -->
 <nav>
-  <div class="nav-container">
-    <div class="logo">BLACKRIDGE</div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </div>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="#gallery">Gallery</a>
 </nav>
 
-<!-- Hero Section -->
+<!-- Hero -->
 <div class="hero">
-  <div class="hero-content">
-    <h1>BLACKRIDGE PERFORMANCE</h1>
-    <p class="hero-subtitle">Custom BeamNG Performance Builds</p>
-    <p class="hero-tagline">Where engineering meets adrenaline. Pushing the limits of virtual automotive performance.</p>
-    <a href="#gallery" class="cta-button">View Builds</a>
-  </div>
+  <h1>BLACKRIDGE PERFORMANCE</h1>
+  <p>Custom BeamNG Performance Builds</p>
 </div>
 
-<!-- Stats Section -->
-<div class="section">
-  <div class="stats">
-    <div class="stat-card">
-      <div class="stat-number">250+</div>
-      <div class="stat-label">Custom Builds</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">1000+</div>
-      <div class="stat-label">HP Average</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">0-60</div>
-      <div class="stat-label">In 2.4s</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">100%</div>
-      <div class="stat-label">Passion</div>
-    </div>
-  </div>
-</div>
-
-<!-- Gallery Section -->
-<div class="section" id="gallery">
-  <div class="section-header">
-    <h2 class="section-title">Featured Builds</h2>
-    <p class="section-subtitle">Showcasing our latest custom performance vehicles</p>
-  </div>
-  <div class="gallery" id="galleryGrid"></div>
-</div>
+<!-- Gallery -->
+<div class="gallery" id="gallery"></div>
 
 <!-- Modal -->
 <div id="modal" class="modal">
   <span class="close" onclick="closeModal()">&times;</span>
   <div class="modal-content">
     <img id="modalImg" alt="Build showcase">
+    <br>
     <a id="downloadBtn" class="download-btn" download>
-      ⬇ Download Image
+      Download Image
     </a>
   </div>
 </div>
 
 <!-- Footer -->
 <footer>
-  <p>© 2026 BLACKRIDGE PERFORMANCE | Built with passion and precision</p>
+  © 2026 Blackridge Performance
 </footer>
 
 <script>
-/* IMAGE LIST WITH METADATA */
-const builds = [
-  { file: "23209.png", name: "Drift Shittle", specs: "2JZ Swap - 780HP" },
-  { file: "car2.jpg", name: "Street Demon", specs: "Supercharged V6 - 850HP" },
-  { file: "mycustombuild.png", name: "Track Beast", specs: "Race Tuned - 950HP" },
-  { file: "etrackbuild.jpg", name: "Circuit King", specs: "Modified Chassis - 1100HP" }
+/* IMAGE LIST */
+const imageFiles = [
+  "23209.png",
+  "car2.jpg",
+  "mycustombuild.png",
+  "etrackbuild.jpg"
 ];
 
-const gallery = document.getElementById("galleryGrid");
+const gallery = document.getElementById("gallery");
 
-builds.forEach((build, index) => {
-  let item = document.createElement("div");
-  item.className = "gallery-item";
-  
+imageFiles.forEach(file => {
   let img = document.createElement("img");
-  img.src = "images/" + build.file;
-  img.alt = build.name;
-  
-  let overlay = document.createElement("div");
-  overlay.className = "gallery-overlay";
-  overlay.innerHTML = `
-    <h3>${build.name}</h3>
-    <p>${build.specs}</p>
-  `;
-  
-  item.appendChild(img);
-  item.appendChild(overlay);
-  
-  item.onclick = function() {
-    openModal(img, build);
+  img.src = "images/" + file;
+  img.alt = "Blackridge build";
+  img.onclick = function() {
+    openModal(img);
   };
-  
-  gallery.appendChild(item);
+  gallery.appendChild(img);
 });
 
-/* MODAL FUNCTIONS */
-function openModal(img, build) {
+/* MODAL */
+function openModal(img) {
   const modal = document.getElementById("modal");
-  const modalImg = document.getElementById("modalImg");
-  const downloadBtn = document.getElementById("downloadBtn");
-  
-  modal.style.display = "block";
-  modalImg.src = img.src;
-  downloadBtn.href = img.src;
-  downloadBtn.download = build.name + ".png";
-  
+  modal.classList.add("active");
+  document.getElementById("modalImg").src = img.src;
+  document.getElementById("downloadBtn").href = img.src;
   document.body.style.overflow = "hidden";
 }
 
 function closeModal() {
-  document.getElementById("modal").style.display = "none";
+  const modal = document.getElementById("modal");
+  modal.classList.remove("active");
   document.body.style.overflow = "auto";
 }
 
-// Close modal on ESC key
+// Close on ESC
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeModal();
 });
 
-// Close modal on background click
+// Close on background click
 document.getElementById('modal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
 
-/* STARFIELD GENERATION */
+/* STARS */
 const starsContainer = document.getElementById("stars");
-for (let i = 0; i < 150; i++) {
+for (let i = 0; i < 120; i++) {
   let star = document.createElement("div");
   star.className = "star";
   
-  let size = Math.random() * 3;
+  let size = Math.random() * 2.5;
   star.style.width = size + "px";
   star.style.height = size + "px";
   star.style.left = Math.random() * 100 + "%";
   star.style.top = Math.random() * 100 + "%";
-  star.style.animationDuration = (Math.random() * 3 + 2) + "s";
+  star.style.animationDuration = (Math.random() * 3 + 1.5) + "s";
   star.style.animationDelay = Math.random() * 2 + "s";
   
   starsContainer.appendChild(star);
 }
-
-/* SMOOTH SCROLLING */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
 </script>
 </body>
 </html>
