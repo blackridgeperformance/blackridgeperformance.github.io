@@ -5,6 +5,7 @@
   <title>Gallery - Blackridge Performance</title>
 
   <style>
+
     body {
       background: #0a0a0a;
       color: white;
@@ -53,6 +54,7 @@
       border-radius: 12px;
       cursor: pointer;
       transition: 0.4s;
+      animation: fadeInUp 0.5s ease;
     }
 
     .gallery img:hover {
@@ -61,6 +63,7 @@
     }
 
     /* Fullscreen modal */
+
     .modal {
       display: none;
       position: fixed;
@@ -110,6 +113,17 @@
       to {opacity: 1;}
     }
 
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     @keyframes zoomIn {
       from {
         transform: scale(0.8);
@@ -134,15 +148,10 @@
 
 <h1>Build Gallery</h1>
 
-<div class="gallery">
-
-  <img src="images/car1.jpg" onclick="openModal(this)">
-  <img src="images/car2.jpg" onclick="openModal(this)">
-  <img src="images/car3.jpg" onclick="openModal(this)">
-
-</div>
+<div class="gallery" id="gallery"></div>
 
 <!-- Fullscreen Modal -->
+
 <div id="modal" class="modal">
 
   <span class="close" onclick="closeModal()">&times;</span>
@@ -158,6 +167,8 @@
 </div>
 
 <script>
+
+// FULLSCREEN FUNCTION
 
 function openModal(img) {
 
@@ -175,7 +186,8 @@ function closeModal() {
 
 }
 
-// Close if clicking background
+// Close when clicking background
+
 window.onclick = function(event) {
 
   let modal = document.getElementById("modal");
@@ -185,6 +197,32 @@ window.onclick = function(event) {
     modal.style.display = "none";
 
   }
+
+}
+
+// AUTO LOAD UP TO 20 IMAGES
+
+const gallery = document.getElementById("gallery");
+
+for (let i = 1; i <= 20; i++) {
+
+  let img = document.createElement("img");
+
+  img.src = "images/car" + i + ".jpg";
+
+  img.onclick = function() {
+
+    openModal(this);
+
+  };
+
+  // Only add if image exists
+
+  img.onload = function() {
+
+    gallery.appendChild(img);
+
+  };
 
 }
 
