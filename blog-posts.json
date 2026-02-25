@@ -17,15 +17,15 @@
   },
   {
     "id": 4,
-    "date": "",
-    "title": "",
+    "date": "February 19th, 2026",
+    "title": "Important News!",
     "image": "",
     "preview": "",
     "content": ""
   },
   {
     "id": 3,
-    "date": "FEBRUARY 25, 2026",
+    "date": "FEBRUARY 13, 2026",
     "title": "Stubby has a new engine!",
     "image": "23208.png",
     "preview": "6.9 litre Gas introduced!",
@@ -33,7 +33,7 @@
   },
   {
     "id": 1,
-    "date": "FEBRUARY 25, 2026",
+    "date": "FEBRUARY 7, 2026",
     "title": "S15 has a new body!",
     "image": "23209.png",
     "preview": "Swapping the body for a cut one was a great decision.",
@@ -41,7 +41,7 @@
   },
   {
     "id": 2,
-    "date": "FEBRUARY 20, 2025",
+    "date": "FEBRUARY 3, 2025",
     "title": "New company being established.",
     "image": "",
     "preview": "Servicing was hard but we got it done.",
