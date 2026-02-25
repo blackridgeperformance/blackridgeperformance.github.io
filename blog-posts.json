@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "date": "FEBRUARY 25, 2026",
+    "title": "First Build Showcase: Project Nightfall",
+    "preview": "Starting off the blog with one of my favorite builds - Project Nightfall. This twin-turbo V8 beast pushes 1200HP and features a completely custom suspension setup.",
+    "content": "Starting off the blog with one of my favorite builds - Project Nightfall. This twin-turbo V8 beast pushes 1200HP and features a completely custom suspension setup optimized for both street and track use.\n\nThe build took approximately 3 weeks to dial in, with special attention paid to weight distribution and aerodynamics. Every detail matters when you're chasing that perfect balance between power and control.\n\nThe engine modifications include custom turbo mapping, upgraded intercoolers, and a completely reworked exhaust system. The suspension geometry was adjusted multiple times to find the sweet spot between comfort and performance.\n\nOne of the biggest challenges was managing heat - with this much power, cooling becomes critical. I spent days testing different radiator configurations and airflow patterns before settling on the final setup.\n\nThe result? A build that can dominate on the track while still being drivable on the street. That's the Blackridge standard."
+  },
+  {
+    "id": 2,
+    "date": "FEBRUARY 20, 2026",
+    "title": "Why Vanilla BeamNG Builds Matter",
+    "preview": "There's something pure about working within the constraints of vanilla BeamNG vehicles. No mods, no shortcuts - just deep understanding of the physics engine.",
+    "content": "There's something pure about working within the constraints of vanilla BeamNG vehicles. No mods, no shortcuts - just deep understanding of the physics engine and creative problem-solving.\n\nEvery limitation becomes an opportunity to innovate. When you can't rely on modded parts, you learn to extract every ounce of performance from stock components. That's where the real engineering happens.\n\nVanilla builds force you to truly understand the game's physics. You learn how weight transfer affects handling, how suspension geometry influences cornering, and how every component interacts with the others.\n\nIt's easy to throw modded parts at a problem. It's much harder - and more rewarding - to solve it with what you have. That's the philosophy behind Blackridge Performance.\n\nWhen someone requests a vanilla build, they're getting something that works within the game's intended parameters. No compatibility issues, no bugs from conflicting mods - just pure, refined performance."
+  },
+  {
+    "id": 3,
+    "date": "FEBRUARY 15, 2026",
+    "title": "The Art of Balance: Street vs Track",
+    "preview": "Every build is a compromise. The question is: what are you willing to sacrifice? Today I'm diving into the eternal debate of street-focused versus track-focused builds.",
+    "content": "Every build is a compromise. The question is: what are you willing to sacrifice? Today I'm diving into the eternal debate of street-focused versus track-focused builds.\n\nA pure track car is easy - strip everything, stiffen everything, maximize downforce. But most people want something they can actually drive to the track. That's where it gets interesting.\n\nStreet builds need comfort, reliability, and reasonable fuel economy. Track builds need grip, speed, and cooling capacity. Finding the middle ground is an art form.\n\nI typically start with suspension - it's the foundation of any good build. Too stiff and the car becomes undriveable on rough roads. Too soft and you lose precision on the track. The sweet spot varies for every vehicle.\n\nThen comes power delivery. Instant throttle response is great for the track but can be twitchy in traffic. I tune for progressive power that builds smoothly - controllable in any situation.\n\nThe best builds are the ones that excel in their intended environment while remaining competent everywhere else. That's the Blackridge approach - no compromises on what matters, intelligent trade-offs on what doesn't."
+  }
+]
