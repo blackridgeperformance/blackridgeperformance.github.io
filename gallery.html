@@ -7,18 +7,19 @@
 <style>
 
 body {
-  background: #0a0a0a;
+  background: radial-gradient(circle at bottom, #0a0f1f, #05070d 80%);
   color: white;
   font-family: Arial, sans-serif;
   margin: 0;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
-/* NAVBAR (Same as gallery) */
+/* NAVBAR */
 
 nav {
-  background: rgba(0,0,0,0.8);
-  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(12px);
   padding: 20px;
   text-align: center;
   position: sticky;
@@ -35,8 +36,48 @@ nav a {
 }
 
 nav a:hover {
-  color: red;
-  text-shadow: 0 0 10px red;
+  color: #00ffd5;
+  text-shadow: 0 0 12px #00ffd5;
+}
+
+/* STARFIELD */
+
+.stars {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  background: #00ffd5;
+  border-radius: 50%;
+  animation: twinkle infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.2; }
+  to { opacity: 1; }
+}
+
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(#00ffd5, transparent);
+  animation: shoot linear forwards;
+}
+
+@keyframes shoot {
+  from {
+    transform: translateY(-100px) translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(600px) translateX(300px);
+    opacity: 0;
+  }
 }
 
 /* HERO */
@@ -47,23 +88,24 @@ nav a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  animation: fadeInUp 0.8s ease;
+  animation: fadeUp 1s ease;
 }
 
 .hero h1 {
-  font-size: 50px;
-  margin-bottom: 10px;
+  font-size: 55px;
+  background: linear-gradient(90deg, #00ffd5, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero p {
   color: #aaa;
-  margin-bottom: 25px;
 }
 
 .hero button {
+  margin-top: 20px;
   padding: 12px 25px;
-  border: 2px solid red;
+  border: 2px solid #00ffd5;
   background: transparent;
   color: white;
   cursor: pointer;
@@ -71,25 +113,48 @@ nav a:hover {
 }
 
 .hero button:hover {
-  background: red;
-  box-shadow: 0 0 20px rgba(255,0,0,0.6);
+  background: #00ffd5;
+  color: black;
+  box-shadow: 0 0 20px #00ffd5;
 }
 
 /* SECTION */
 
 .section {
-  padding: 60px 20px;
+  padding: 70px 20px;
   max-width: 1100px;
   margin: auto;
-  animation: fadeInUp 0.8s ease;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 1s;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section h2 {
   text-align: center;
-  margin-bottom: 40px;
 }
 
-/* FEATURED GRID */
+/* DIVIDER */
+
+.divider {
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #00ffd5, transparent);
+  margin: 20px auto 40px auto;
+  animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+/* FEATURED */
 
 .featured {
   display: flex;
@@ -107,30 +172,32 @@ nav a:hover {
 
 .featured img:hover {
   transform: scale(1.08);
-  box-shadow: 0 0 25px rgba(255,0,0,0.6);
+  box-shadow:
+    0 0 20px #00ffd5,
+    0 0 40px rgba(0,255,213,0.4);
 }
 
-/* CAPABILITIES */
+/* CARDS */
 
-.capabilities {
+.cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  text-align: center;
 }
 
-.capabilities div {
-  margin: 20px;
+.card {
+  margin: 15px;
   padding: 20px;
   width: 250px;
-  border: 1px solid rgba(255,0,0,0.3);
-  border-radius: 10px;
+  border-radius: 12px;
+  background: rgba(0,255,213,0.05);
+  border: 1px solid rgba(0,255,213,0.2);
   transition: 0.3s;
 }
 
-.capabilities div:hover {
-  background: rgba(255,0,0,0.1);
-  box-shadow: 0 0 20px rgba(255,0,0,0.3);
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0,255,213,0.4);
 }
 
 /* STATS */
@@ -139,16 +206,42 @@ nav a:hover {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  text-align: center;
 }
 
 .stat {
   margin: 20px 40px;
+  text-align: center;
 }
 
 .stat-number {
   font-size: 40px;
-  color: red;
+  color: #00ffd5;
+}
+
+/* MODAL */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  text-align: center;
+  padding-top: 50px;
+}
+
+.modal img {
+  max-width: 90%;
+  max-height: 80%;
+}
+
+.close {
+  position: absolute;
+  right: 35px;
+  top: 20px;
+  font-size: 40px;
+  cursor: pointer;
 }
 
 /* FOOTER */
@@ -161,10 +254,10 @@ footer {
 
 /* ANIMATION */
 
-@keyframes fadeInUp {
+@keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -178,113 +271,156 @@ footer {
 <body>
 
 <nav>
-  <a href="index.html">Home</a>
-  <a href="gallery.html">Gallery</a>
-  <a href="about.html">About</a>
+<a href="index.html">Home</a>
+<a href="gallery.html">Gallery</a>
+<a href="about.html">About</a>
 </nav>
 
-<!-- HERO -->
+<div class="stars" id="stars"></div>
 
 <div class="hero">
-  <h1>BLACKRIDGE PERFORMANCE</h1>
-  <p>Precision Built. Performance Driven.</p>
-  <button onclick="location.href='gallery.html'">
-    View Full Gallery
-  </button>
+<h1>BLACKRIDGE PERFORMANCE</h1>
+<p>Precision Built. Performance Driven.</p>
+<button onclick="location.href='gallery.html'">
+View Full Gallery
+</button>
 </div>
 
-<!-- FEATURED BUILDS -->
-
 <div class="section">
-  <h2>Featured Builds</h2>
-  <div class="featured" id="featured"></div>
+<h2>Featured Builds</h2>
+<div class="divider"></div>
+<div class="featured" id="featured"></div>
 </div>
 
-<!-- ABOUT -->
-
 <div class="section">
-  <h2>About Blackridge</h2>
-  <p style="color:#aaa; text-align:center; max-width:800px; margin:auto;">
-    Blackridge Performance is a fictional high-performance engineering division focused on custom vehicle builds within BeamNG Drive. Every project emphasizes realism, performance tuning, and aggressive styling.
-  </p>
+<h2>Capabilities</h2>
+<div class="divider"></div>
+
+<div class="cards">
+<div class="card">Full Vehicle Customization</div>
+<div class="card">Performance Engineering</div>
+<div class="card">Suspension Tuning</div>
+<div class="card">Track Builds</div>
 </div>
 
-<!-- CAPABILITIES -->
-
-<div class="section">
-  <h2>Capabilities</h2>
-  <div class="capabilities">
-    <div>Full Vehicle Customization</div>
-    <div>Performance Tuning</div>
-    <div>Suspension Engineering</div>
-    <div>Track-Oriented Builds</div>
-  </div>
 </div>
 
-<!-- STATS -->
-
 <div class="section">
-  <h2>Performance Stats</h2>
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-number" data-target="4">0</div>
-      Builds
-    </div>
-    <div class="stat">
-      <div class="stat-number" data-target="120">0</div>
-      Hours Engineering
-    </div>
-  </div>
+
+<h2>Performance Stats</h2>
+<div class="divider"></div>
+
+<div class="stats">
+<div class="stat">
+<div class="stat-number" data-target="4">0</div>
+Builds
+</div>
+
+<div class="stat">
+<div class="stat-number" data-target="120">0</div>
+Hours
+</div>
+</div>
+
+</div>
+
+<div id="modal" class="modal">
+<span class="close" onclick="closeModal()">&times;</span>
+<img id="modalImg">
 </div>
 
 <footer>
-  © 2026 Blackridge Performance
+© 2026 Blackridge Performance
 </footer>
 
 <script>
 
-/* SAME IMAGE LIST AS GALLERY */
+/* IMAGE LIST */
 
 const imageFiles = [
-  "23209.png",
-  "car2.jpg",
-  "mycustombuild.png",
-  "etrackbuild.jpg"
+"23209.png",
+"car2.jpg",
+"mycustombuild.png",
+"etrackbuild.jpg"
 ];
 
 const featured = document.getElementById("featured");
 
-imageFiles.slice(0,4).forEach(file => {
-  let img = document.createElement("img");
-  img.src = "images/" + file;
-  img.onclick = function() {
-    location.href = "gallery.html";
-  };
-  featured.appendChild(img);
+imageFiles.forEach(file=>{
+let img=document.createElement("img");
+img.src="images/"+file;
+img.onclick=()=>openModal(img);
+featured.appendChild(img);
 });
 
-/* STATS COUNTER */
+/* MODAL */
 
-const counters = document.querySelectorAll(".stat-number");
+function openModal(img){
+document.getElementById("modal").style.display="block";
+document.getElementById("modalImg").src=img.src;
+}
 
-counters.forEach(counter => {
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
 
-  const target = +counter.dataset.target;
-  let count = 0;
+/* STARS */
 
-  const update = () => {
-    const increment = target / 100;
-    count += increment;
+const stars=document.getElementById("stars");
 
-    if (count < target) {
-      counter.innerText = Math.floor(count);
-      requestAnimationFrame(update);
-    } else {
-      counter.innerText = target;
-    }
-  };
+for(let i=0;i<140;i++){
+let star=document.createElement("div");
+star.className="star";
+let size=Math.random()*3;
+star.style.width=size+"px";
+star.style.height=size+"px";
+star.style.left=Math.random()*100+"%";
+star.style.top=Math.random()*100+"%";
+star.style.animationDuration=(Math.random()*3+2)+"s";
+stars.appendChild(star);
+}
 
-  update();
+/* SHOOTING STARS */
+
+setInterval(()=>{
+let star=document.createElement("div");
+star.className="shooting-star";
+star.style.left=Math.random()*100+"%";
+stars.appendChild(star);
+setTimeout(()=>star.remove(),1000);
+},4000);
+
+/* SCROLL REVEAL */
+
+const sections=document.querySelectorAll(".section");
+
+window.addEventListener("scroll",()=>{
+sections.forEach(sec=>{
+if(sec.getBoundingClientRect().top < window.innerHeight-100){
+sec.classList.add("visible");
+}
+});
+});
+
+/* STATS */
+
+const counters=document.querySelectorAll(".stat-number");
+
+counters.forEach(counter=>{
+let target=counter.dataset.target;
+let count=0;
+
+function update(){
+let inc=target/100;
+count+=inc;
+if(count<target){
+counter.innerText=Math.floor(count);
+requestAnimationFrame(update);
+}else{
+counter.innerText=target;
+}
+}
+update();
 });
 
 </script>
