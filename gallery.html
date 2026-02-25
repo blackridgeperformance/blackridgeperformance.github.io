@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title>Gallery - Blackridge Performance</title>
 
   <style>
-
     body {
       background: #0a0a0a;
       color: white;
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       margin: 0;
     }
 
     nav {
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.8);
       backdrop-filter: blur(10px);
       padding: 20px;
       text-align: center;
+      position: sticky;
+      top: 0;
     }
 
     nav a {
@@ -34,24 +36,23 @@
 
     h1 {
       text-align: center;
-      margin-top: 40px;
-      animation: fadeIn 1.5s ease;
+      margin-top: 30px;
+      animation: fadeIn 1s ease;
     }
 
     .gallery {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      padding: 40px;
+      padding: 30px;
     }
 
     .gallery img {
       width: 320px;
       margin: 15px;
       border-radius: 12px;
+      cursor: pointer;
       transition: 0.4s;
-      opacity: 0;
-      animation: fadeInUp 1s forwards;
     }
 
     .gallery img:hover {
@@ -59,24 +60,68 @@
       box-shadow: 0 0 25px rgba(255,0,0,0.6);
     }
 
+    /* Fullscreen modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.95);
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+      animation: zoomIn 0.3s ease;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      font-size: 40px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .download-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: 2px solid red;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .download-btn:hover {
+      background: red;
+      box-shadow: 0 0 15px red;
+    }
+
     @keyframes fadeIn {
       from {opacity: 0;}
       to {opacity: 1;}
     }
 
-    @keyframes fadeInUp {
+    @keyframes zoomIn {
       from {
+        transform: scale(0.8);
         opacity: 0;
-        transform: translateY(40px);
       }
       to {
+        transform: scale(1);
         opacity: 1;
-        transform: translateY(0);
       }
     }
 
   </style>
-
 </head>
 
 <body>
@@ -91,11 +136,59 @@
 
 <div class="gallery">
 
-<img src="images/car1.jpg">
-<img src="images/car2.jpg">
-<img src="images/car3.jpg">
+  <img src="images/car1.jpg" onclick="openModal(this)">
+  <img src="images/car2.jpg" onclick="openModal(this)">
+  <img src="images/car3.jpg" onclick="openModal(this)">
 
 </div>
+
+<!-- Fullscreen Modal -->
+<div id="modal" class="modal">
+
+  <span class="close" onclick="closeModal()">&times;</span>
+
+  <img id="modalImg">
+
+  <br>
+
+  <a id="downloadBtn" class="download-btn" download>
+    Download Image
+  </a>
+
+</div>
+
+<script>
+
+function openModal(img) {
+
+  document.getElementById("modal").style.display = "block";
+
+  document.getElementById("modalImg").src = img.src;
+
+  document.getElementById("downloadBtn").href = img.src;
+
+}
+
+function closeModal() {
+
+  document.getElementById("modal").style.display = "none";
+
+}
+
+// Close if clicking background
+window.onclick = function(event) {
+
+  let modal = document.getElementById("modal");
+
+  if (event.target == modal) {
+
+    modal.style.display = "none";
+
+  }
+
+}
+
+</script>
 
 </body>
 </html>
