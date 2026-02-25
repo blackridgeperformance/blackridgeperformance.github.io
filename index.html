@@ -14,49 +14,145 @@
 body {
   background: #0a0a0a;
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   overflow-x: hidden;
+  line-height: 1.6;
 }
 
 /* NAVBAR */
 nav {
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(20px);
-  padding: 20px 40px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(15px);
+  padding: 25px 50px;
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-nav a {
-  color: #fff;
-  margin: 0 25px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 1px;
+.nav-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #c41e3a;
+  letter-spacing: 3px;
+}
+
+.menu-toggle {
+  width: 30px;
+  height: 25px;
   position: relative;
-  transition: color 0.3s ease;
+  cursor: pointer;
+  z-index: 101;
 }
 
-nav a::after {
-  content: '';
+.menu-toggle span {
   position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #00ffd5;
-  transition: width 0.3s ease;
-}
-
-nav a:hover {
-  color: #00ffd5;
-}
-
-nav a:hover::after {
   width: 100%;
+  height: 2px;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle span:nth-child(1) {
+  top: 0;
+}
+
+.menu-toggle span:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.menu-toggle span:nth-child(3) {
+  bottom: 0;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 50%;
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg);
+  bottom: 50%;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 350px;
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.98);
+  backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(196, 30, 58, 0.3);
+  z-index: 99;
+  transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+
+.sidebar.active {
+  right: 0;
+}
+
+.sidebar-content {
+  padding: 100px 40px 40px;
+}
+
+.sidebar-section {
+  margin-bottom: 50px;
+}
+
+.sidebar-section h3 {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.sidebar a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.sidebar a:hover {
+  color: #c41e3a;
+  transform: translateX(10px);
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 98;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
 /* STARFIELD */
@@ -75,36 +171,35 @@ nav a:hover::after {
 }
 
 @keyframes twinkle {
-  from { opacity: 0.3; }
-  to { opacity: 1; }
+  from { opacity: 0.2; }
+  to { opacity: 0.9; }
 }
 
 /* HERO */
 .hero {
-  height: 85vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 40px 20px;
+  padding: 60px 20px;
 }
 
 .hero h1 {
-  font-size: clamp(48px, 8vw, 90px);
+  font-size: clamp(56px, 10vw, 110px);
   font-weight: 900;
-  background: linear-gradient(120deg, #fff 0%, #00ffd5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 20px;
-  letter-spacing: 2px;
-  animation: fadeInUp 0.8s ease-out;
+  color: #c41e3a;
+  margin-bottom: 25px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  animation: fadeInUp 1s ease-out;
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -113,41 +208,201 @@ nav a:hover::after {
 }
 
 .hero p {
-  font-size: clamp(16px, 2.5vw, 22px);
-  color: rgba(255, 255, 255, 0.7);
-  letter-spacing: 3px;
+  font-size: clamp(18px, 3vw, 24px);
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 4px;
   font-weight: 300;
-  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+  animation: fadeInUp 1s ease-out 0.3s backwards;
+}
+
+/* ABOUT SECTION */
+.about {
+  max-width: 800px;
+  margin: 80px auto;
+  padding: 0 40px;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: clamp(36px, 5vw, 48px);
+  font-weight: 700;
+  margin-bottom: 30px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #c41e3a;
+}
+
+.about p {
+  font-size: clamp(16px, 2vw, 20px);
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/* REQUEST SECTION */
+.request {
+  max-width: 800px;
+  margin: 80px auto;
+  padding: 40px;
+  text-align: center;
+  border: 1px solid rgba(196, 30, 58, 0.3);
+  background: rgba(196, 30, 58, 0.05);
+}
+
+.request h2 {
+  font-size: clamp(32px, 4vw, 42px);
+  font-weight: 700;
+  margin-bottom: 25px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #c41e3a;
+}
+
+.request p {
+  font-size: clamp(16px, 2vw, 18px);
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.discord-username {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 15px 30px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(196, 30, 58, 0.4);
+  color: #c41e3a;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 1px;
+  font-family: 'Courier New', monospace;
+}
+
+/* UPDATES SECTION */
+.updates {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 0 40px;
+}
+
+.updates h2 {
+  font-size: clamp(36px, 5vw, 48px);
+  font-weight: 700;
+  margin-bottom: 50px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #c41e3a;
+  text-align: center;
+}
+
+.update-entry {
+  border-left: 2px solid rgba(196, 30, 58, 0.3);
+  padding: 25px 0 25px 30px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.update-entry::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 30px;
+  width: 10px;
+  height: 10px;
+  background: #c41e3a;
+  border-radius: 50%;
+}
+
+.update-date {
+  font-size: 14px;
+  color: #c41e3a;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.update-entry p {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+/* SECTION DIVIDER */
+.divider {
+  width: 60px;
+  height: 1px;
+  background: rgba(196, 30, 58, 0.5);
+  margin: 80px auto;
+}
+
+/* GALLERY HEADER */
+.gallery-header {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 0 20px;
+}
+
+.gallery-header h2 {
+  font-size: clamp(36px, 5vw, 48px);
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  color: #c41e3a;
+}
+
+.gallery-header p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 2px;
 }
 
 /* GALLERY */
+.gallery-section {
+  padding: 0 40px 100px;
+}
+
 .gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 60px 30px;
-  gap: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
   max-width: 1400px;
   margin: 0 auto;
 }
 
-.gallery img {
-  width: 350px;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 8px;
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: brightness(0.85);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  aspect-ratio: 16/10;
+  background: #111;
 }
 
-.gallery img:hover {
-  transform: translateY(-8px) scale(1.03);
-  filter: brightness(1);
-  box-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(0, 255, 213, 0.3);
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.8) contrast(1.1);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+  filter: brightness(1) contrast(1);
+}
+
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0);
+  transition: border-color 0.4s ease;
+  pointer-events: none;
+}
+
+.gallery-item:hover::after {
+  border-color: rgba(196, 30, 58, 0.5);
 }
 
 /* MODAL */
@@ -159,15 +414,14 @@ nav a:hover::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.96);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.95);
 }
 
 .modal.active {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeIn 0.25s ease;
+  animation: fadeIn 0.3s ease;
 }
 
 @keyframes fadeIn {
@@ -177,22 +431,25 @@ nav a:hover::after {
 
 .modal-content {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: 90%;
-  max-height: 85vh;
+  max-height: 90vh;
   padding: 20px;
 }
 
 .modal img {
   max-width: 100%;
   max-height: 80vh;
-  border-radius: 4px;
-  animation: modalZoom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  object-fit: contain;
+  animation: modalZoom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes modalZoom {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.96);
   }
   to {
     opacity: 1;
@@ -202,101 +459,110 @@ nav a:hover::after {
 
 .close {
   position: absolute;
-  right: 30px;
-  top: 30px;
-  font-size: 40px;
+  right: 35px;
+  top: 35px;
+  font-size: 42px;
   font-weight: 300;
   cursor: pointer;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.7);
   transition: all 0.3s ease;
   z-index: 1001;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-family: Arial, sans-serif;
 }
 
 .close:hover {
-  color: #00ffd5;
+  color: #fff;
   transform: rotate(90deg);
 }
 
 .download-btn {
   display: inline-block;
-  margin-top: 25px;
-  padding: 14px 35px;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
-  color: #fff;
+  margin-top: 30px;
+  padding: 15px 40px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 13px;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   transition: all 0.3s ease;
-  border-radius: 2px;
 }
 
 .download-btn:hover {
-  border-color: #00ffd5;
-  color: #00ffd5;
-  background: rgba(0, 255, 213, 0.05);
-  transform: translateY(-2px);
+  border-color: #c41e3a;
+  color: #c41e3a;
+  background: rgba(196, 30, 58, 0.1);
 }
 
 /* FOOTER */
 footer {
   text-align: center;
-  padding: 40px 20px;
+  padding: 50px 20px;
   color: rgba(255, 255, 255, 0.3);
   font-size: 13px;
-  letter-spacing: 1px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  margin-top: 60px;
+  letter-spacing: 2px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
   nav {
-    padding: 15px 20px;
-    text-align: center;
+    padding: 20px 25px;
   }
   
-  nav a {
-    margin: 0 15px;
-    font-size: 12px;
+  .sidebar {
+    width: 100%;
+    right: -100%;
+  }
+  
+  .sidebar-content {
+    padding: 80px 30px 40px;
+  }
+  
+  .about {
+    padding: 0 30px;
+  }
+  
+  .request {
+    margin: 60px 20px;
+    padding: 30px 20px;
+  }
+  
+  .updates {
+    padding: 0 30px;
+  }
+  
+  .gallery-section {
+    padding: 0 20px 80px;
   }
   
   .gallery {
-    padding: 40px 20px;
-  }
-  
-  .gallery img {
-    width: 100%;
-    max-width: 400px;
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
   
   .close {
     right: 20px;
     top: 20px;
-    font-size: 35px;
+    font-size: 36px;
   }
 }
 
-/* SMOOTH REVEAL */
-.gallery img {
+/* STAGGERED GALLERY REVEAL */
+.gallery-item {
   opacity: 0;
-  animation: revealImage 0.6s ease-out forwards;
+  animation: revealItem 0.6s ease-out forwards;
 }
 
-.gallery img:nth-child(1) { animation-delay: 0.1s; }
-.gallery img:nth-child(2) { animation-delay: 0.2s; }
-.gallery img:nth-child(3) { animation-delay: 0.3s; }
-.gallery img:nth-child(4) { animation-delay: 0.4s; }
+.gallery-item:nth-child(1) { animation-delay: 0.1s; }
+.gallery-item:nth-child(2) { animation-delay: 0.2s; }
+.gallery-item:nth-child(3) { animation-delay: 0.3s; }
+.gallery-item:nth-child(4) { animation-delay: 0.4s; }
 
-@keyframes revealImage {
+@keyframes revealItem {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -311,28 +577,101 @@ footer {
 
 <!-- Navigation -->
 <nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="#gallery">Gallery</a>
+  <div class="nav-logo">BLACKRIDGE</div>
+  <div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </nav>
 
-<!-- Hero -->
-<div class="hero">
-  <h1>BLACKRIDGE PERFORMANCE</h1>
-  <p>Custom BeamNG Performance Builds</p>
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-content">
+    <div class="sidebar-section">
+      <h3>Navigate</h3>
+      <a href="#home" class="sidebar-link">Home</a>
+      <a href="#about" class="sidebar-link">About</a>
+      <a href="#request" class="sidebar-link">Request</a>
+      <a href="#updates" class="sidebar-link">Updates</a>
+      <a href="#gallery" class="sidebar-link">Gallery</a>
+      <a href="blog.html">Blog</a>
+    </div>
+  </div>
 </div>
 
-<!-- Gallery -->
-<div class="gallery" id="gallery"></div>
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Hero -->
+<div class="hero" id="home">
+  <h1>Blackridge</h1>
+  <p>PERFORMANCE</p>
+</div>
+
+<!-- About Section -->
+<div class="about" id="about">
+  <h2>About</h2>
+  <p>
+    Blackridge Performance specializes in custom BeamNG.drive builds, 
+    pushing the boundaries of virtual automotive engineering. Each vehicle 
+    is meticulously crafted to deliver exceptional performance and style.
+  </p>
+  <p>
+    From high-performance street builds to track-focused machines, 
+    every project represents a commitment to precision and power.
+  </p>
+</div>
+
+<!-- Divider -->
+<div class="divider"></div>
+
+<!-- Request Section -->
+<div class="request" id="request">
+  <h2>Request Builds</h2>
+  <p>
+    Interested in a custom build for vanilla BeamNG vehicles? 
+    Contact me on Discord to discuss your project.
+  </p>
+  <div class="discord-username">YOUR_DISCORD_USERNAME</div>
+</div>
+
+<!-- Divider -->
+<div class="divider"></div>
+
+<!-- Updates Section -->
+<div class="updates" id="updates">
+  <h2>Updates</h2>
+  <div class="update-entry">
+    <div class="update-date">FEB 25, 2026</div>
+    <p>Initial site launch. Gallery featuring four custom builds now live.</p>
+  </div>
+  <div class="update-entry">
+    <div class="update-date">FEB 20, 2026</div>
+    <p>Added request system for custom vanilla BeamNG builds. Contact via Discord for commissions.</p>
+  </div>
+  <!-- Add more updates here as needed -->
+</div>
+
+<!-- Divider -->
+<div class="divider"></div>
+
+<!-- Gallery Section -->
+<div class="gallery-section" id="gallery">
+  <div class="gallery-header">
+    <h2>Gallery</h2>
+    <p>FEATURED BUILDS</p>
+  </div>
+  <div class="gallery" id="galleryGrid"></div>
+</div>
 
 <!-- Modal -->
 <div id="modal" class="modal">
   <span class="close" onclick="closeModal()">&times;</span>
   <div class="modal-content">
     <img id="modalImg" alt="Build showcase">
-    <br>
     <a id="downloadBtn" class="download-btn" download>
-      Download Image
+      DOWNLOAD
     </a>
   </div>
 </div>
@@ -343,6 +682,26 @@ footer {
 </footer>
 
 <script>
+/* SIDEBAR TOGGLE */
+const menuToggle = document.getElementById('menuToggle');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+function toggleSidebar() {
+  menuToggle.classList.toggle('active');
+  sidebar.classList.toggle('active');
+  overlay.classList.toggle('active');
+  document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : 'auto';
+}
+
+menuToggle.addEventListener('click', toggleSidebar);
+overlay.addEventListener('click', toggleSidebar);
+
+sidebarLinks.forEach(link => {
+  link.addEventListener('click', toggleSidebar);
+});
+
 /* IMAGE LIST */
 const imageFiles = [
   "23209.png",
@@ -351,16 +710,23 @@ const imageFiles = [
   "etrackbuild.jpg"
 ];
 
-const gallery = document.getElementById("gallery");
+const gallery = document.getElementById("galleryGrid");
 
 imageFiles.forEach(file => {
+  let item = document.createElement("div");
+  item.className = "gallery-item";
+  
   let img = document.createElement("img");
   img.src = "images/" + file;
   img.alt = "Blackridge build";
-  img.onclick = function() {
+  
+  item.appendChild(img);
+  
+  item.onclick = function() {
     openModal(img);
   };
-  gallery.appendChild(img);
+  
+  gallery.appendChild(item);
 });
 
 /* MODAL */
@@ -388,18 +754,29 @@ document.getElementById('modal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
 
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
 /* STARS */
 const starsContainer = document.getElementById("stars");
-for (let i = 0; i < 120; i++) {
+for (let i = 0; i < 100; i++) {
   let star = document.createElement("div");
   star.className = "star";
   
-  let size = Math.random() * 2.5;
+  let size = Math.random() * 2;
   star.style.width = size + "px";
   star.style.height = size + "px";
   star.style.left = Math.random() * 100 + "%";
   star.style.top = Math.random() * 100 + "%";
-  star.style.animationDuration = (Math.random() * 3 + 1.5) + "s";
+  star.style.animationDuration = (Math.random() * 3 + 2) + "s";
   star.style.animationDelay = Math.random() * 2 + "s";
   
   starsContainer.appendChild(star);
