@@ -221,6 +221,34 @@ nav {
 
 .post-header {
   padding: 30px 35px;
+  display: flex;
+  gap: 25px;
+  align-items: flex-start;
+}
+
+.post-thumbnail {
+  flex-shrink: 0;
+  width: 180px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.post-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.blog-post:hover .post-thumbnail img {
+  transform: scale(1.05);
+}
+
+.post-header-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .post-date {
@@ -258,8 +286,16 @@ nav {
 }
 
 .post-content.expanded {
-  max-height: 3000px;
+  max-height: 4000px;
   padding: 0 35px 35px;
+}
+
+.post-expanded-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 25px;
 }
 
 .post-full-text {
@@ -336,6 +372,24 @@ footer {
   .blog-container {
     padding: 0 30px 80px;
   }
+  
+  .post-header {
+    flex-direction: column;
+    padding: 25px;
+  }
+  
+  .post-thumbnail {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .post-content {
+    padding: 0 25px;
+  }
+  
+  .post-content.expanded {
+    padding: 0 25px 25px;
+  }
 }
 </style>
 </head>
@@ -403,6 +457,16 @@ function toggleSidebar() {
 menuToggle.addEventListener('click', toggleSidebar);
 overlay.addEventListener('click', toggleSidebar);
 
+/* CHECK IF IMAGE EXISTS */
+async function imageExists(imagePath) {
+  try {
+    const response = await fetch(imagePath, { method: 'HEAD' });
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
+
 /* LOAD BLOG POSTS FROM JSON */
 async function loadBlogPosts() {
   try {
@@ -412,22 +476,48 @@ async function loadBlogPosts() {
     const container = document.getElementById('blogContainer');
     container.innerHTML = '';
     
-    posts.forEach(post => {
+    for (const post of posts) {
       const article = document.createElement('article');
       article.className = 'blog-post';
       article.setAttribute('data-id', post.id);
       
-      article.innerHTML = `
-        <div class="post-header">
+      // Check if image exists
+      let hasImage = false;
+      let imagePath = '';
+      if (post.image && post.image.trim() !== '') {
+        imagePath = 'images/' + post.image;
+        hasImage = await imageExists(imagePath);
+      }
+      
+      // Build header with optional thumbnail
+      let headerHTML = `<div class="post-header">`;
+      
+      if (hasImage) {
+        headerHTML += `
+          <div class="post-thumbnail">
+            <img src="${imagePath}" alt="${post.title}">
+          </div>
+        `;
+      }
+      
+      headerHTML += `
+        <div class="post-header-text">
           <div class="post-date">${post.date}</div>
           <h2>${post.title}</h2>
           <p class="post-preview">${post.preview}</p>
         </div>
-        <div class="post-content">
-          <div class="post-full-text">${post.content}</div>
-        </div>
-        <div class="read-more-indicator">READ MORE</div>
-      `;
+      </div>`;
+      
+      // Build content section with optional expanded image
+      let contentHTML = `<div class="post-content">`;
+      
+      if (hasImage) {
+        contentHTML += `<img src="${imagePath}" alt="${post.title}" class="post-expanded-image">`;
+      }
+      
+      contentHTML += `<div class="post-full-text">${post.content}</div></div>`;
+      
+      article.innerHTML = headerHTML + contentHTML + `<div class="read-more-indicator">READ MORE</div>`;
       
       // Add click handler to toggle expansion
       article.addEventListener('click', function(e) {
@@ -455,7 +545,7 @@ async function loadBlogPosts() {
       });
       
       container.appendChild(article);
-    });
+    }
     
   } catch (error) {
     console.error('Error loading blog posts:', error);
