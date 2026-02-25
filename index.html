@@ -1,115 +1,245 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Blackridge Performance</title>
+<meta charset="UTF-8">
+<title>Blackridge Performance</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
 
-    body {
-      background: linear-gradient(180deg, #0a0a0a, #111);
-      color: white;
-      font-family: Arial, sans-serif;
-      overflow-x: hidden;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, sans-serif;
+}
 
-    nav {
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      animation: slideDown 1s ease;
-    }
+body{
+background:linear-gradient(to bottom,#05070f,#0a0f1f);
+color:white;
+overflow-x:hidden;
+}
 
-    nav a {
-      color: white;
-      margin: 20px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 18px;
-      transition: 0.3s;
-    }
+/* Stars background */
 
-    nav a:hover {
-      color: red;
-      text-shadow: 0 0 10px red;
-    }
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+z-index:-1;
+}
 
-    header {
-      text-align: center;
-      padding: 120px 20px;
-      animation: fadeIn 2s ease;
-    }
+.star{
+position:absolute;
+background:white;
+border-radius:50%;
+animation:twinkle infinite alternate;
+}
 
-    header h1 {
-      font-size: 60px;
-      letter-spacing: 6px;
-      animation: glow 3s infinite alternate;
-    }
+@keyframes twinkle{
+from{opacity:0.2;}
+to{opacity:1;}
+}
 
-    header p {
-      color: #aaa;
-      margin-top: 20px;
-      font-size: 20px;
-    }
+/* Hero section */
 
-    .button {
-      margin-top: 40px;
-      display: inline-block;
-      padding: 15px 30px;
-      border: 2px solid red;
-      color: white;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
 
-    .button:hover {
-      background: red;
-      box-shadow: 0 0 20px red;
-    }
+.title{
+font-size:60px;
+font-weight:bold;
+background:linear-gradient(90deg,#00ffaa,#00aaff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:glow 3s infinite alternate;
+}
 
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(30px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
+@keyframes glow{
+from{filter:drop-shadow(0 0 5px #00ffaa);}
+to{filter:drop-shadow(0 0 20px #00aaff);}
+}
 
-    @keyframes slideDown {
-      from {transform: translateY(-100%);}
-      to {transform: translateY(0);}
-    }
+.subtitle{
+color:#aaa;
+margin-top:10px;
+margin-bottom:30px;
+}
 
-    @keyframes glow {
-      from {text-shadow: 0 0 10px red;}
-      to {text-shadow: 0 0 25px red;}
-    }
+button{
+background:linear-gradient(90deg,#00ffaa,#00aaff);
+border:none;
+padding:15px 30px;
+border-radius:10px;
+color:black;
+font-weight:bold;
+cursor:pointer;
+transition:0.25s;
+}
 
-  </style>
+button:hover{
+transform:translateY(-5px) scale(1.05);
+box-shadow:0 10px 25px rgba(0,255,200,0.4);
+}
 
+/* Featured gallery */
+
+.section{
+padding:80px 20px;
+max-width:1100px;
+margin:auto;
+}
+
+.section-title{
+font-size:32px;
+margin-bottom:30px;
+text-align:center;
+}
+
+.featured-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.featured-grid img{
+width:100%;
+border-radius:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.featured-grid img:hover{
+transform:scale(1.05);
+box-shadow:0 15px 35px rgba(0,255,200,0.3);
+}
+
+.view-more{
+text-align:center;
+margin-top:30px;
+}
+
+.footer{
+text-align:center;
+padding:40px;
+color:#666;
+}
+
+</style>
 </head>
-
 <body>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="gallery.html">Gallery</a>
-  <a href="about.html">About</a>
-</nav>
+<div class="stars" id="stars"></div>
 
-<header>
+<!-- HERO -->
 
-  <h1>BLACKRIDGE PERFORMANCE</h1>
+<div class="hero">
 
-  <p>Custom BeamNG Performance Engineering</p>
+<div class="title">
+BLACKRIDGE PERFORMANCE
+</div>
 
-  <a href="gallery.html" class="button">View Gallery</a>
+<div class="subtitle">
+BeamNG Drive Custom Builds • Engineering • Performance
+</div>
 
-</header>
+<button onclick="location.href='gallery.html'">
+View Full Gallery
+</button>
+
+</div>
+
+
+<!-- FEATURED SECTION -->
+
+<div class="section">
+
+<div class="section-title">
+Featured Builds
+</div>
+
+<div class="featured-grid" id="featuredGrid"></div>
+
+<div class="view-more">
+<button onclick="location.href='gallery.html'">
+View All Builds
+</button>
+</div>
+
+</div>
+
+
+<div class="footer">
+© 2026 Blackridge Performance
+</div>
+
+
+<script>
+
+/* SAME IMAGE LIST AS GALLERY */
+
+const imageFiles = [
+
+"23209.png",
+"car2.jpg",
+"car3.png",
+"car4.jpg",
+"car5.png",
+"car6.jpg"
+
+];
+
+
+/* LOAD FIRST 4 IMAGES */
+
+const grid = document.getElementById("featuredGrid");
+
+imageFiles.slice(0,4).forEach(file => {
+
+let img = document.createElement("img");
+
+img.src = "images/" + file;
+
+img.onclick = () => {
+location.href="gallery.html";
+};
+
+grid.appendChild(img);
+
+});
+
+
+/* CREATE STARS */
+
+const starsContainer=document.getElementById("stars");
+
+for(let i=0;i<120;i++){
+
+let star=document.createElement("div");
+
+star.className="star";
+
+let size=Math.random()*3;
+
+star.style.width=size+"px";
+star.style.height=size+"px";
+
+star.style.left=Math.random()*100+"%";
+star.style.top=Math.random()*100+"%";
+
+star.style.animationDuration=(Math.random()*3+2)+"s";
+
+starsContainer.appendChild(star);
+
+}
+
+</script>
 
 </body>
 </html>
