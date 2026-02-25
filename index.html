@@ -7,11 +7,16 @@
 
 <style>
 
+/* ======================
+GLOBAL
+====================== */
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:Segoe UI, sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
@@ -20,7 +25,42 @@ color:white;
 overflow-x:hidden;
 }
 
-/* Stars background */
+/* ======================
+NAVBAR
+====================== */
+
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+padding:15px 30px;
+background:rgba(10,15,30,0.5);
+backdrop-filter:blur(10px);
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+}
+
+.nav-logo{
+font-weight:bold;
+color:#00ffaa;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+transition:0.3s;
+}
+
+.nav-links a:hover{
+color:#00ffaa;
+}
+
+/* ======================
+STARS BACKGROUND
+====================== */
 
 .stars{
 position:fixed;
@@ -41,7 +81,35 @@ from{opacity:0.2;}
 to{opacity:1;}
 }
 
-/* Hero section */
+.shooting-star{
+position:absolute;
+width:2px;
+height:80px;
+background:linear-gradient(white,transparent);
+opacity:0.7;
+animation:shoot linear infinite;
+}
+
+@keyframes shoot{
+from{
+transform:translateY(-100px) translateX(0);
+opacity:1;
+}
+to{
+transform:translateY(800px) translateX(400px);
+opacity:0;
+}
+}
+
+/* ======================
+SECTIONS
+====================== */
+
+.section{
+padding:100px 20px;
+max-width:1100px;
+margin:auto;
+}
 
 .hero{
 height:100vh;
@@ -54,7 +122,6 @@ text-align:center;
 
 .title{
 font-size:60px;
-font-weight:bold;
 background:linear-gradient(90deg,#00ffaa,#00aaff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
@@ -68,8 +135,7 @@ to{filter:drop-shadow(0 0 20px #00aaff);}
 
 .subtitle{
 color:#aaa;
-margin-top:10px;
-margin-bottom:30px;
+margin:15px 0 30px 0;
 }
 
 button{
@@ -84,45 +150,68 @@ transition:0.25s;
 }
 
 button:hover{
-transform:translateY(-5px) scale(1.05);
+transform:translateY(-5px);
 box-shadow:0 10px 25px rgba(0,255,200,0.4);
 }
 
-/* Featured gallery */
+/* ======================
+FEATURED GRID
+====================== */
 
-.section{
-padding:80px 20px;
-max-width:1100px;
-margin:auto;
-}
-
-.section-title{
-font-size:32px;
-margin-bottom:30px;
-text-align:center;
-}
-
-.featured-grid{
+.grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
 }
 
-.featured-grid img{
+.grid img{
 width:100%;
 border-radius:10px;
-cursor:pointer;
 transition:0.3s;
+cursor:pointer;
 }
 
-.featured-grid img:hover{
+.grid img:hover{
 transform:scale(1.05);
 box-shadow:0 15px 35px rgba(0,255,200,0.3);
 }
 
-.view-more{
+/* ======================
+CARDS
+====================== */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+padding:20px;
+border-radius:10px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+background:rgba(0,255,200,0.08);
+}
+
+/* ======================
+STATS
+====================== */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 text-align:center;
-margin-top:30px;
+gap:20px;
+}
+
+.stat-number{
+font-size:40px;
+color:#00ffaa;
 }
 
 .footer{
@@ -131,11 +220,40 @@ padding:40px;
 color:#666;
 }
 
+/* ======================
+SCROLL ANIMATION
+====================== */
+
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
 </style>
 </head>
 <body>
 
+
+<div class="navbar">
+<div class="nav-logo">Blackridge</div>
+
+<div class="nav-links">
+<a href="#featured">Builds</a>
+<a href="#about">About</a>
+<a href="#stats">Stats</a>
+<a href="gallery.html">Gallery</a>
+</div>
+</div>
+
+
 <div class="stars" id="stars"></div>
+
 
 <!-- HERO -->
 
@@ -146,31 +264,95 @@ BLACKRIDGE PERFORMANCE
 </div>
 
 <div class="subtitle">
-BeamNG Drive Custom Builds • Engineering • Performance
+Precision Built. Performance Driven.
 </div>
 
 <button onclick="location.href='gallery.html'">
-View Full Gallery
+View Gallery
 </button>
 
 </div>
 
 
-<!-- FEATURED SECTION -->
+<!-- FEATURED -->
 
-<div class="section">
+<div class="section reveal" id="featured">
 
-<div class="section-title">
-Featured Builds
+<h2>Featured Builds</h2>
+
+<div class="grid" id="featuredGrid"></div>
+
 </div>
 
-<div class="featured-grid" id="featuredGrid"></div>
 
-<div class="view-more">
-<button onclick="location.href='gallery.html'">
-View All Builds
-</button>
+<!-- ABOUT -->
+
+<div class="section reveal" id="about">
+
+<h2>About Blackridge</h2>
+
+<p style="color:#aaa;margin-top:15px;">
+Blackridge Performance is a fictional engineering and customization division focused on creating high-performance vehicle builds within BeamNG Drive. Every build is engineered with attention to realism, performance balance, and aggressive visual identity.
+</p>
+
 </div>
+
+
+<!-- CAPABILITIES -->
+
+<div class="section reveal">
+
+<h2>Capabilities</h2>
+
+<div class="cards">
+
+<div class="card">Full Vehicle Customization</div>
+<div class="card">Performance Engineering</div>
+<div class="card">Suspension Tuning</div>
+<div class="card">Visual Redesign</div>
+
+</div>
+
+</div>
+
+
+<!-- STATS -->
+
+<div class="section reveal" id="stats">
+
+<h2>Performance Stats</h2>
+
+<div class="stats">
+
+<div>
+<div class="stat-number" data-target="24">0</div>
+Builds
+</div>
+
+<div>
+<div class="stat-number" data-target="120">0</div>
+Hours Engineering
+</div>
+
+<div>
+<div class="stat-number" data-target="6">0</div>
+Platforms
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PHILOSOPHY -->
+
+<div class="section reveal">
+
+<h2>Philosophy</h2>
+
+<p style="color:#aaa;margin-top:15px;">
+Every Blackridge build is created with purpose. Performance, realism, and design work together to produce machines that feel believable, aggressive, and engineered.
+</p>
 
 </div>
 
@@ -182,64 +364,111 @@ View All Builds
 
 <script>
 
-/* SAME IMAGE LIST AS GALLERY */
+/* IMAGE LIST */
 
-const imageFiles = [
-
+const imageFiles=[
 "23209.png",
 "car2.jpg",
 "car3.png",
 "car4.jpg",
-"car5.png",
-"car6.jpg"
-
+"car5.png"
 ];
 
+const grid=document.getElementById("featuredGrid");
 
-/* LOAD FIRST 4 IMAGES */
-
-const grid = document.getElementById("featuredGrid");
-
-imageFiles.slice(0,4).forEach(file => {
-
-let img = document.createElement("img");
-
-img.src = "images/" + file;
-
-img.onclick = () => {
-location.href="gallery.html";
-};
-
+imageFiles.slice(0,4).forEach(file=>{
+let img=document.createElement("img");
+img.src="images/"+file;
+img.onclick=()=>location.href="gallery.html";
 grid.appendChild(img);
+});
+
+
+/* STARS */
+
+const stars=document.getElementById("stars");
+
+for(let i=0;i<120;i++){
+let star=document.createElement("div");
+star.className="star";
+let size=Math.random()*3;
+star.style.width=size+"px";
+star.style.height=size+"px";
+star.style.left=Math.random()*100+"%";
+star.style.top=Math.random()*100+"%";
+star.style.animationDuration=(Math.random()*3+2)+"s";
+stars.appendChild(star);
+}
+
+/* SHOOTING STARS */
+
+setInterval(()=>{
+let star=document.createElement("div");
+star.className="shooting-star";
+star.style.left=Math.random()*100+"%";
+star.style.top="0px";
+stars.appendChild(star);
+
+setTimeout(()=>star.remove(),2000);
+
+},3000);
+
+
+/* SCROLL REVEAL */
+
+const reveals=document.querySelectorAll(".reveal");
+
+window.addEventListener("scroll",()=>{
+
+reveals.forEach(el=>{
+
+let top=el.getBoundingClientRect().top;
+
+if(top<window.innerHeight-100){
+el.classList.add("active");
+}
+
+});
 
 });
 
 
-/* CREATE STARS */
+/* STATS COUNTER */
 
-const starsContainer=document.getElementById("stars");
+const counters=document.querySelectorAll(".stat-number");
 
-for(let i=0;i<120;i++){
+counters.forEach(counter=>{
 
-let star=document.createElement("div");
+let target=counter.dataset.target;
 
-star.className="star";
+let count=0;
 
-let size=Math.random()*3;
+let update=()=>{
 
-star.style.width=size+"px";
-star.style.height=size+"px";
+let increment=target/100;
 
-star.style.left=Math.random()*100+"%";
-star.style.top=Math.random()*100+"%";
+count+=increment;
 
-star.style.animationDuration=(Math.random()*3+2)+"s";
+if(count<target){
 
-starsContainer.appendChild(star);
+counter.innerText=Math.floor(count);
+
+requestAnimationFrame(update);
+
+}else{
+
+counter.innerText=target;
 
 }
 
+};
+
+update();
+
+});
+
 </script>
+
 
 </body>
 </html>
